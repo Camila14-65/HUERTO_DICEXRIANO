@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Instrucciones del Huerto Dicexriano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf1dc; --paper2:#f6e2bd; --ink:#4a2412; --soft:#7a4a2e;
+  --orange:#e8832a; --orange2:#f4b266; --red:#c8481f; --leaf:#8a9a3b; --card:rgba(255,250,238,.82);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--paper:#2a1710;--paper2:#3a2015;--ink:#fbe9cc;--soft:#e2b98f;--card:rgba(58,32,21,.85);}
+}
+:root[data-theme="dark"]{--paper:#2a1710;--paper2:#3a2015;--ink:#fbe9cc;--soft:#e2b98f;--card:rgba(58,32,21,.85);}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.55;
+  background-image:
+   radial-gradient(circle at 8% 12%,rgba(232,131,42,.28),transparent 28%),
+   radial-gradient(circle at 95% 30%,rgba(200,72,31,.20),transparent 30%),
+   radial-gradient(circle at 5% 75%,rgba(244,178,102,.35),transparent 32%),
+   radial-gradient(circle at 92% 92%,rgba(138,154,59,.22),transparent 30%);
+  background-attachment:fixed}
+.wrap{max-width:760px;margin:0 auto;padding:28px 18px 56px}
+h1,h2{font-family:Oswald,Impact,sans-serif;font-weight:600;margin:0;line-height:1.1}
+/* Decoración */
+.deco{display:flex;justify-content:space-between;font-size:2.2rem;padding:0 4px}
+.deco span:nth-child(odd){transform:rotate(-12deg)}.deco span:nth-child(even){transform:rotate(10deg)}
+.monster{width:64px;height:64px;display:block}
+/* Título con trazo de pincel */
+.brush{margin:14px -6px 26px;padding:34px 22px;text-align:center;color:#4a2412;
+  background:linear-gradient(100deg,#f4b266,#e8832a 55%,#f0a04b);
+  clip-path:polygon(1% 14%,10% 4%,30% 9%,52% 2%,76% 8%,97% 3%,100% 30%,98% 62%,100% 90%,78% 97%,55% 92%,30% 98%,8% 93%,0 70%,2% 40%)}
+.brush h1{font-size:clamp(1.9rem,7vw,3rem);text-transform:uppercase;letter-spacing:.02em}
+.intro{text-align:center;font-size:1.1rem;max-width:34em;margin:0 auto 22px}
+.hello{background:var(--card);border-radius:18px;padding:16px 20px;margin-bottom:26px;border:2px dashed var(--orange)}
+h2{font-size:1.7rem;margin:30px 0 14px}
+/* Tarjetas */
+.cards{display:grid;gap:14px}
+.card{background:var(--card);border-radius:20px 20px 20px 6px;padding:16px 18px 16px 70px;position:relative;box-shadow:0 3px 0 var(--orange2)}
+.card .ico{position:absolute;left:16px;top:14px;font-size:2.2rem}
+.card h3{margin:0 0 4px;font-size:1.15rem;color:var(--red)}
+.card p{margin:0}
+/* Pasos */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:10px}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:center;background:var(--card);border-radius:16px;padding:12px 16px}
+.steps li::before{content:counter(s);flex:none;width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;
+  font:600 1.2rem Oswald,sans-serif;display:grid;place-items:center}
+/* Checklist */
+.check{background:var(--card);border-radius:18px;padding:8px 18px}
+.check label{display:flex;gap:12px;align-items:center;padding:10px 0;cursor:pointer;border-bottom:1px dotted var(--orange2)}
+.check label:last-child{border:0}
+.check input{width:22px;height:22px;accent-color:var(--orange);flex:none}
+.check input:checked + span{text-decoration:line-through;opacity:.6}
+.msg{margin:10px 4px 0;font-weight:800;color:var(--red);min-height:1.5em}
+/* Notas */
+.notes{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.notes li{background:var(--card);border-left:6px solid var(--leaf);border-radius:6px 16px 16px 6px;padding:12px 16px}
+.thanks{text-align:center;margin:28px 0 8px;color:var(--soft)}
+.final{text-align:center;font:600 1.6rem Oswald,sans-serif;color:var(--red);margin:18px 0}
+.theme{position:fixed;right:12px;top:calc(env(safe-area-inset-top,0px) + 10px);background:var(--card);border:2px solid var(--orange);
+  border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer;color:var(--ink)}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+@media (prefers-reduced-motion:no-preference){.monster{animation:bob 3s ease-in-out infinite}.monster.b{animation-delay:-1.5s}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+</style>
+</head>
+<body>
+<button class="theme" id="theme" aria-label="Cambiar entre modo claro y oscuro">🌙 / ☀️</button>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 64 64">
+    <path d="M14 18 L20 4 L26 16 M50 18 L44 4 L38 16" fill="#f3e6c8" stroke="#4a2412" stroke-width="2" stroke-linejoin="round"/>
+    <ellipse cx="32" cy="38" rx="26" ry="23" fill="currentColor" stroke="#4a2412" stroke-width="2"/>
+    <circle cx="23" cy="34" r="5" fill="#fff"/><circle cx="41" cy="34" r="5" fill="#fff"/>
+    <circle cx="23" cy="35" r="2.5" fill="#4a2412"/><circle cx="41" cy="35" r="2.5" fill="#4a2412"/>
+    <path d="M25 46 Q32 53 39 46" fill="none" stroke="#4a2412" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="16" cy="44" r="4" fill="#ff9aa2" opacity=".6"/><circle cx="48" cy="44" r="4" fill="#ff9aa2" opacity=".6"/>
+  </symbol>
+</svg>
+
+<main class="wrap" id="app"><!-- El contenido se genera desde CONTENIDO (abajo) --></main>
+
+<script>
+/* =====================================================================
+   ✏️  AQUÍ EDITAS TODO EL TEXTO DE LA PÁGINA
+   Cambia solo lo que está entre comillas. No borres comas ni corchetes.
+   ===================================================================== */
+const CONTENIDO = {
+  titulo: "Instrucciones del Huerto Dicexriano",
+  intro: "Los pequeños monstruos de la oficina se reúnen para una tarde llena de encanto, dulces y colores otoñales. Queremos invitarte a compartir un momento especial y relajado.",
+  saludo: "Como cada año, los invitamos a participar en nuestra tradicional dinámica de integración.",
+  saludoTitulo: "Estimado equipo:",
+
+  detallesTitulo: "Detalles de la actividad",
+  detalles: [
+    { icono: "🎃", titulo: "Dinámica", texto: "Traer aproximadamente 100 dulces de su preferencia para compartir y un contenedor o calabaza para recolectar sus golosinas." },
+    { icono: "🕑", titulo: "Horario",  texto: "Iniciaremos aproximadamente a las 2:00 p.m., una vez que esté completo el turno de la tarde y la supervisora Tania dé la indicación para recorrer los cubículos." },
+    { icono: "🍁", titulo: "Código de vestimenta", texto: "Se sugiere asistir con colores otoñales." }
+  ],
+
+  pasosTitulo: "¿Cómo funciona?",
+  pasos: [
+    "Llega con tus dulces y tu contenedor o calabaza.",
+    "Esperamos a que esté completo el turno de la tarde (≈ 2:00 p.m.).",
+    "La supervisora Tania da la indicación.",
+    "Recorremos los cubículos y recolectamos golosinas."
+  ],
+
+  listaTitulo: "Mi kit del huerto",
+  listaMensajeListo: "¡Listo! Tienes todo para la dinámica 🎃",
+  lista: [
+    "Aproximadamente 100 dulces para compartir",
+    "Contenedor o calabaza para mis golosinas",
+    "Ropa en colores otoñales (opcional)"
+  ],
+
+  notasTitulo: "Notas importantes",
+  notas: [
+    "La participación y el código de vestimenta son 100% voluntarios.",
+    "Solicitamos mantener el debido respeto hacia los compañeros que decidan no formar parte de la actividad."
+  ],
+  gracias: "Agradecemos su apoyo para lograr una convivencia armónica.",
+  final: "¡Saca tu niño interior, únete y diviértete!"
+};
+/* ===================== Fin de la zona editable ===================== */
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mon = (color, extra='') => `<svg class="monster ${extra}" style="color:${color}" aria-hidden="true"><use href="#m"/></svg>`;
+const C = CONTENIDO;
+
+document.getElementById('app').innerHTML = `
+  <div class="deco" aria-hidden="true">${mon('#8fd0e6')}<span>🍂</span><span>🎃</span><span>🍁</span>${mon('#a5d27a','b')}</div>
+  <div class="brush"><h1>${esc(C.titulo)}</h1></div>
+  <p class="intro">${esc(C.intro)}</p>
+  <div class="hello"><strong>${esc(C.saludoTitulo)}</strong> ${esc(C.saludo)}</div>
+
+  <h2>${esc(C.detallesTitulo)}</h2>
+  <div class="cards">${C.detalles.map(d => `
+    <article class="card"><span class="ico" aria-hidden="true">${d.icono}</span>
+      <h3>${esc(d.titulo)}</h3><p>${esc(d.texto)}</p></article>`).join('')}</div>
+
+  <h2>${esc(C.pasosTitulo)}</h2>
+  <ol class="steps">${C.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
+
+  <h2>${esc(C.listaTitulo)}</h2>
+  <div class="check" id="check">${C.lista.map((t,i) => `
+    <label><input type="checkbox" data-i="${i}"><span>${esc(t)}</span></label>`).join('')}</div>
+  <p class="msg" id="msg" aria-live="polite"></p>
+
+  <h2>${esc(C.notasTitulo)}</h2>
+  <ul class="notes">${C.notas.map(n => `<li>${esc(n)}</li>`).join('')}</ul>
+
+  <p class="thanks">${esc(C.gracias)}</p>
+  <p class="final">${esc(C.final)}</p>
+  <div class="deco" aria-hidden="true">${mon('#f0a04b')}<span>🍄</span><span>👻</span><span>🌰</span>${mon('#b79be0','b')}</div>
+`;
+
+/* Checklist interactivo (recuerda lo marcado si el navegador lo permite) */
+const boxes = [...document.querySelectorAll('#check input')], msg = document.getElementById('msg');
+let saved = [];
+try { saved = JSON.parse(localStorage.getItem('huerto-kit') || '[]'); } catch(e) {}
+boxes.forEach((b,i) => b.checked = !!saved[i]);
+function update(){
+  try { localStorage.setItem('huerto-kit', JSON.stringify(boxes.map(b => b.checked))); } catch(e) {}
+  const faltan = boxes.filter(b => !b.checked).length;
+  msg.textContent = faltan === 0 ? C.listaMensajeListo : '';
+}
+boxes.forEach(b => b.addEventListener('change', update)); update();
+
+/* Botón claro/oscuro */
+document.getElementById('theme').onclick = () => {
+  const r = document.documentElement;
+  const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  r.dataset.theme = dark ? 'light' : 'dark';
+};
+</script>
+</body>
+</html>
